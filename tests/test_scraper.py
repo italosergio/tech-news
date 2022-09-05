@@ -12,7 +12,6 @@ from tests.assets.test_assets import (
 )
 import os
 import time
-import pytest
 import pickle
 from requests.exceptions import ReadTimeout
 from tests.utils import mocked_fetch
@@ -101,17 +100,16 @@ def test_scrape_noticia():
 
 
 # Req.5
-@pytest.mark.parametrize("amount", [1, 5, 13, 30])
-def test_get_tech_news(amount, mocker):
+def test_get_tech_news(mocker):
     # Arrange
     db.news.drop()
     mocker.patch("tech_news.scraper.fetch", new=mocked_fetch)
     mocked_create_news = mocker.patch("tech_news.scraper.create_news")
 
-    # Act
-    result = get_tech_news(amount)
-    mocked_create_news.assert_called_once_with(result)
+    for amount in [1, 5, 13, 30]:
+        result = get_tech_news(amount)
+        mocked_create_news.assert_called_once_with(result)
 
-    # Assert
-    # A função retorna a quantidade correta de notícias
-    assert result == all_news[:amount]  # resultados originais
+        # Assert
+        # A função retorna a quantidade correta de notícias
+        assert result == all_news[:amount]  # resultados originais
