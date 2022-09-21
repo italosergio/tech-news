@@ -22,19 +22,24 @@ def fetch(url):
 
 # Requisito 2
 def scrape_novidades(html_content):
-    page_links = (
+    page_news_links = (
         Selector(html_content).css("a.cs-overlay-link::attr(href)").getall()
     )
 
-    if not page_links:
+    if not page_news_links:
         return []
 
-    return page_links
+    return page_news_links
 
 
 # Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
+    next_page_link = (
+        Selector(html_content)
+        .css(".page-numbers::attr(href)")
+        .get()
+    )
+    return next_page_link
 
 
 # Requisito 4
