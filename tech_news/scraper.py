@@ -36,7 +36,7 @@ def scrape_novidades(html_content):
 def scrape_next_page_link(html_content):
     next_page_link = (
         Selector(html_content)
-        .css(".page-numbers::attr(href)")
+        .css("a.next.page-numbers::attr(href)")
         .get()
     )
     return next_page_link
