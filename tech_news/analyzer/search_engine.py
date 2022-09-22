@@ -28,11 +28,18 @@ def search_by_date(date):
 # Requisito 8
 def search_by_tag(tag):
     news_by_tag = search_news({"tags": {"$regex": tag, "$options": "i"}})
-    new_news = [(new["title"], new["url"]) for new in news_by_tag]
+    news_by_tag_semantic = [(new["title"], new["url"]) for new in news_by_tag]
 
-    return new_news
+    return news_by_tag_semantic
 
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    news_by_category = search_news(
+        {"category": {"$regex": category, "$options": "i"}}
+    )
+    news_by_category_semantic = [
+        (new["title"], new["url"]) for new in news_by_category
+    ]
+
+    return news_by_category_semantic
