@@ -75,7 +75,7 @@ def get_tech_news(amount):
     scrapy_url = 'https://blog.betrybe.com/'
 
     url_news = list()
-    while len(url_news) < amount:
+    while len(url_news) <= amount:
         for news_link in scrape_novidades(fetch(scrapy_url)):
             url_news.append(news_link)
         scrapy_url = scrape_next_page_link(fetch(scrapy_url))
