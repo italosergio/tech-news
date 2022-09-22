@@ -12,9 +12,7 @@ def top_5_news():
     if news_list_size < max_iterations:
         max_iterations = news_list_size
 
-    top_5 = list()
-    for index in range(0, max_iterations):
-        top_5.append((news[index]["title"], news[index]["url"]))
+    top_5 = [(new["title"], new["url"]) for new in news[:max_iterations]]
 
     return top_5
 
